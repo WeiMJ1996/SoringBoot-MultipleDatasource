@@ -1,0 +1,44 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    name: mysql_blog
+#    type: com.alibaba.druid.pool.DruidDataSource
+    master:
+      jdbcurl: mysql://118.24.92.222:3306/blogtest?useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: admin
+      password: 1234
+      driver-class-name: com.mysql.jdbc.Driver
+    slave:
+      url: jdbc:mysql://118.24.92.222:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+      username: admin
+      password: 1234
+      driver-class-name: com.mysql.jdbc.Driver
+    read: get,select,count,list,query,find
+    wrute: add,create,update,delete,remove,insert
+    druid:
+      filters: stat
+#      driver-class-name: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://118.24.92.222:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=true
+#      username: admin
+#      password: 1234
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.wmj.blog.entity
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count==countSql
